@@ -63,8 +63,15 @@ for t = 1:n_hours-1
     end
 end
 
-for t = 1:n_hours-1
+% For stage 2 to H-1
+for t = 2:n_hours-1
     transitionProba_cell{t} = transitionProb(:,:,t);
 end
+
+% For stage 1: Choose the middile value and prob
+nodeValue(1,1) = nodeValue(1,floor(n_nodes/2));
+nodeValue(1,2:end) = zeros(1,n_nodes-1);
+A = transitionProb(:,:,1);
+transitionProba_cell{1} = A(floor(n_nodes/2),:);
 
 end
